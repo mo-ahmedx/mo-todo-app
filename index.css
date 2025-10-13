@@ -97,8 +97,71 @@ li button:hover {
 .delte-btn:hover {
   background-color: darkred;
 }
+.btn-group {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-group button {
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-group button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-group button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.btn-group button:last-child {
+  background-color: crimson;
+  color: white;
+}
+
+.btn-group button:last-child:hover {
+  background-color: darkred;
+}
+
+
 
 #taskList {
   max-height: 300px;
   overflow-y: auto;
+}
+
+
+#filter-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+#filter-section button {
+  flex: 1;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #e9ecef;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s color 0.3s;
+  margin: 0 0.2rem;
+}
+
+#filter-section button:hover {
+  background-color: #d1d1d1;
+}
+
+#filter-section button:active {
+  background-color: #198754;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }

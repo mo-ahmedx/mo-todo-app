@@ -27,6 +27,10 @@ function addTask(){
 }
 
 function renderTask(task){
+
+  const btnGroup = document.createElement('div');
+  btnGroup.classList.add('btn-group');
+
   const li = document.createElement('li');
   if(task.completed) li.classList.add('completed');
 
@@ -39,6 +43,21 @@ function renderTask(task){
     updateLocalStorage();
   });
 
+  const editBtn = document.createElement('button');
+  editBtn.textContent = 'Edit';
+  editBtn.addEventListener('click', () => {
+    const newText = prompt("Edit your tasks:", task.text);
+    if(newText && newText.trim() !== ''){
+
+      task.text = newText.trim();
+
+
+      span.textContent = task.text;
+      updateLocalStorage();
+    }
+    
+  });
+
   const delBtn = document.createElement('button');
   delBtn.textContent = 'Delete';
   delBtn.addEventListener('click', () => {
@@ -47,7 +66,9 @@ function renderTask(task){
   });
 
   li.appendChild(span);
-  li.appendChild(delBtn);
+  btnGroup.appendChild(editBtn);
+  btnGroup.appendChild(delBtn);
+  li.appendChild(btnGroup)
   taskList.appendChild(li);
 
 
@@ -82,3 +103,35 @@ function updateLocalStorage(){
   });
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+
+const filterButtons = document.querySelectorAll('#filter-section button');
+
+
+filterButtons.forEach(button =>{
+  button.addEventListener('click', () => {
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    const filterType = button.id.replace('filter-', '');
+    applyFilter(filterType);
+  });
+});
+
+function applyFilter(type){
+  const tasks = document.querySelectorAll('#taskList li');
+  tasks.forEach(li => {
+    const isCompleted = li.classList.contains('completed');
+    li.style.display = 
+    type === 'all' ? 'flex':
+    type === 'completed' && isCompleted ? 'flex' :
+    type === 'pending' && !isCompleted ? 'flex' : 'none';
+  });
+
+  localStorage.setItem('activeFilter', type);
+}
+
+window.addEventListener('load', () => {
+  const savedFilter = localStorage.getItem('activeFilter') || 'all';
+  document.getElementById(`filter-${savedFilter}`).classList.add('active');
+  applyFilter(savedFilter);
+});
