@@ -18,6 +18,15 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 350px;
+  transition: background 0.5s, color 0.5s;
+}
+
+li {
+  background: rgba(255,255,255,0.8);
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 #todo-container h1 {
@@ -147,13 +156,14 @@ li button:hover {
   flex: 1;
   padding: 0.4rem 0.8rem;
   border: none;
-  border-radius: 8px;
-  background-color: #e9ecef;
+  border-radius: 20px;
+  background-color: #eee;
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.3s color 0.3s;
   margin: 0 0.2rem;
+  padding: 6px 12px;
 }
 
 #filter-section button:hover {
@@ -161,7 +171,142 @@ li button:hover {
 }
 
 #filter-section button:active {
-  background-color: #198754;
+  background-color: #007bff;
   color: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+#taskCounter {
+  text-align: right;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+body.dark #taskCounter {
+  color: #ccc;
+}
+
+
+#clearAllBtn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  cursor: pointer ;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#clearAllBtn:hover{
+  background-color: #e65c00;
+}
+
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+body.dark{
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark #todo-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+body.dark input, 
+body.dark button {
+  background-color: #2b2b2b;
+  color: white;
+  border: 1px solid #444;
+}
+
+body.dark #todo-container h1 {
+  color: #ccc;
+}
+
+body.dark li {
+  border-bottom: 1px solid #444;
+}
+
+body.dark #clearAllBtn {
+  background-color: #ff8c00;
+}
+
+body.dark #clearAllBtn:hover {
+  background-color: #e67600;
+}
+
+@keyframes fadeIn {
+  from{ opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes slideOut {
+  from {opacity: 1; transform: translateX(0); height: auto; margin-bottom: 0.5rem;}
+  to { opacity: 0; transform: translateX(100%); height: 0; margin-bottom: 0;}
+
+}
+
+li {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+li.removing {
+  animation: slideOut 0.4s ease forwards;
 }
