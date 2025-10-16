@@ -1,5 +1,9 @@
+/* ============================================================
+   🔹 GLOBAL STYLES & RESET
+============================================================ */
 * {
   box-sizing: border-box;
+  transition: background 0.3s, color 0.3s;
 }
 
 body {
@@ -11,7 +15,9 @@ body {
   padding: 2rem;
 }
 
-
+/* ============================================================
+   🔹 MAIN CONTAINER
+============================================================ */
 #todo-container {
   background-color: #fff;
   padding: 1.5rem 2rem;
@@ -21,20 +27,18 @@ body {
   transition: background 0.5s, color 0.5s;
 }
 
-li {
-  background: rgba(255,255,255,0.8);
-  border-radius: 8px;
-  padding: 0.6rem;
-  margin-bottom: 0.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
+/* ============================================================
+   🔹 HEADINGS
+============================================================ */
 #todo-container h1 {
   text-align: center;
   margin-bottom: 1rem;
   color: #333;
 }
 
+/* ============================================================
+   🔹 INPUT SECTION
+============================================================ */
 #input-section {
   display: flex;
   gap: 0.5rem;
@@ -50,6 +54,7 @@ li {
 }
 
 #addBtn {
+  flex: 0;
   background-color: green;
   color: white;
   border: none;
@@ -63,10 +68,119 @@ li {
   background-color: #218838;
 }
 
+/* ============================================================
+   🔹 DATE SECTION
+============================================================ */
+#date-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  border-color: var(--date-bg, #f0f0f0);
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
+}
+
+#date-section label {
+  font-weight: bold;
+  color: var(--date-bg, #333);
+}
+
+#date-section input[type="date"] {
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+#date-section input[type="date"]:hover {
+  border-color: #007bff;
+}
+
+/* ============================================================
+   🔹 DARK MODE DATE STYLES
+============================================================ */
+body.dark #date-section {
+  --date-bg: #2b2b2b;
+  --text-color: #f5f5f5;
+}
+
+body.dark #date-section input[type="date"] {
+  background-color: #444;
+  color: #fff;
+  border-color: #666;
+}
+
+body.dark #date-section label {
+  color: #ccc;
+}
+
+/* ============================================================
+   🔹 DATE CONTROLS & TODAY BUTTON
+============================================================ */
+.date-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#todayBtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#todayBtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+body.dark #todayBtn {
+  background-color: #4da3ff;
+}
+
+body.dark #todayBtn:hover {
+  background-color: #1f75d9;
+}
+
+/* ============================================================
+   🔹 CONFETTI ANIMATION
+============================================================ */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* ============================================================
+   🔹 TASK LIST STYLES
+============================================================ */
 #taskList {
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 #taskList li {
@@ -75,11 +189,27 @@ li {
   align-items: center;
   padding: 0.5rem 0;
   border-bottom: 1px solid #eee;
+  background: rgba(255,255,255,0.8);
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* Completed task style */
 li.completed span {
   text-decoration: line-through;
   color: gray;
+}
+
+/* ============================================================
+   🔹 CHECKBOX & BUTTONS IN TASKS
+============================================================ */
+.task-checkbox {
+  margin-right: 0.5rem;
+  width: 18px;
+  height: auto;
+  cursor: pointer;
 }
 
 li button {
@@ -96,16 +226,9 @@ li button:hover {
   background-color: darkred;
 }
 
-.delete-btn {
-  margin-left: 10px;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.delte-btn:hover {
-  background-color: darkred;
-}
+/* ============================================================
+   🔹 EDIT/DELETE BUTTON GROUP
+============================================================ */
 .btn-group {
   display: flex;
   gap: 0.4rem;
@@ -138,14 +261,9 @@ li button:hover {
   background-color: darkred;
 }
 
-
-
-#taskList {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-
+/* ============================================================
+   🔹 FILTER SECTION (ALL / COMPLETED / PENDING)
+============================================================ */
 #filter-section {
   display: flex;
   justify-content: space-between;
@@ -161,7 +279,7 @@ li button:hover {
   color: #333;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s color 0.3s;
+  transition: background 0.3s, color 0.3s;
   margin: 0 0.2rem;
   padding: 6px 12px;
 }
@@ -176,6 +294,9 @@ li button:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+/* ============================================================
+   🔹 TASK COUNTER & SUMMARY
+============================================================ */
 #taskCounter {
   text-align: right;
   font-size: 0.9rem;
@@ -188,7 +309,9 @@ body.dark #taskCounter {
   color: #ccc;
 }
 
-
+/* ============================================================
+   🔹 CLEAR ALL BUTTON
+============================================================ */
 #clearAllBtn {
   background-color: #ff6600;
   color: white;
@@ -197,15 +320,18 @@ body.dark #taskCounter {
   padding: 0.5rem 1rem;
   width: 100%;
   margin-top: 1rem;
-  cursor: pointer ;
+  cursor: pointer;
   font-weight: bold;
   transition: background 0.3s;
 }
 
-#clearAllBtn:hover{
+#clearAllBtn:hover {
   background-color: #e65c00;
 }
 
+/* ============================================================
+   🔹 THEME TOGGLE SWITCH
+============================================================ */
 #theme-toggle {
   display: flex;
   align-items: center;
@@ -259,7 +385,10 @@ input:checked + .slider::before {
   transform: translateX(24px);
 }
 
-body.dark{
+/* ============================================================
+   🔹 DARK MODE STYLING
+============================================================ */
+body.dark {
   background-color: #121212;
   color: #f1f1f1;
 }
@@ -282,6 +411,7 @@ body.dark #todo-container h1 {
 
 body.dark li {
   border-bottom: 1px solid #444;
+  color: #121212;
 }
 
 body.dark #clearAllBtn {
@@ -292,15 +422,17 @@ body.dark #clearAllBtn:hover {
   background-color: #e67600;
 }
 
+/* ============================================================
+   🔹 ANIMATIONS (FADE IN / SLIDE OUT)
+============================================================ */
 @keyframes fadeIn {
-  from{ opacity: 0; transform: translateY(-10px);}
-  to {opacity: 1; transform: translateY(0);}
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideOut {
-  from {opacity: 1; transform: translateX(0); height: auto; margin-bottom: 0.5rem;}
-  to { opacity: 0; transform: translateX(100%); height: 0; margin-bottom: 0;}
-
+  from { opacity: 1; transform: translateX(0); height: auto; margin-bottom: 0.5rem; }
+  to { opacity: 0; transform: translateX(100%); height: 0; margin-bottom: 0; }
 }
 
 li {
